@@ -191,3 +191,8 @@ body.dark .history li {
   z-index: 9999;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+@media (max-width: 600px) {
+  .splash h1 {
+    font-size: 1.2rem; /* or any smaller size you prefer */
+  }
+}
