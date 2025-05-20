@@ -1,19 +1,24 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f0f2f5;
+  background: #040404;
   display: flex;
   justify-content: center;
   padding: 40px;
 }
 
 .tracker-container {
+  box-shadow: 
+    0 0 10px #FFD700, 
+    0 0 20px #FFC107, 
+    0 0 30px #FFA500,
+    0 5px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
   background: #fff;
   padding: 30px;
   width: 100%;
   max-width: 500px;
   border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
 h1 {
@@ -146,8 +151,11 @@ body.dark {
 }
 
 body.dark .tracker-container {
-  background: #1e1e1e;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.6);
+  background: #222;
+  box-shadow: 
+    0 0 15px #FFD700, 
+    0 0 25px #FFC107, 
+    0 0 40px #FFA500;
 }
 
 body.dark .summary-item.income {
@@ -189,4 +197,25 @@ position: fixed;
   z-index: 9999;
   font-size: 2rem;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.tracker-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4e00, #ff9500, #ff0000, #ff9500, #ff4e00);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fieryGradient 3s ease infinite;
+}
+
+@keyframes fieryGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
