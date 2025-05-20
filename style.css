@@ -232,3 +232,10 @@ position: fixed;
     transform: translateX(0);
   }
 }
+#splash h3 {
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slideInEase 2s ease forwards;
+  width: 100%;
+  text-align: center;
+}
