@@ -118,3 +118,12 @@ clearBtn.addEventListener("click", () => {
     updateChart();
   }
 });
+const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+darkModeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
+setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+      document.querySelector('.main-content').style.display = 'block';
+    }, 3000);

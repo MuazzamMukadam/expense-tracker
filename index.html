@@ -8,8 +8,13 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <div id="splash">
+    <h3>© Muazzam Mukadam</h3>
+  </div>
+  <div class="main-content" style="display: none;"></div>
   <div class="tracker-container">
     <h1>Expense Tracker</h1>
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
     <div class="set-income">
   <h2>Set Your Income</h2>
   <input type="number" id="income-input" placeholder="Enter your income" />
@@ -41,7 +46,7 @@
     <h2>Expense Breakdown</h2>
     <canvas id="expenseChart" width="300" height="300"></canvas>
   </div>
-
+</div>
   <script src="script.js"></script>
 </body>
 </html>

@@ -126,3 +126,68 @@ h1 {
 #clear-btn:hover {
   background: #d32f2f;
 }
+#dark-mode-toggle {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  float: right;
+}
+
+#dark-mode-toggle:hover {
+  background: #555;
+}
+body.dark {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+body.dark .tracker-container {
+  background: #1e1e1e;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.6);
+}
+
+body.dark .summary-item.income {
+  background: #388e3c;
+}
+body.dark .summary-item.balance {
+  background: #1976d2;
+}
+body.dark .summary-item.expense {
+  background: #d32f2f;
+}
+
+body.dark #expense-form button,
+body.dark #clear-btn,
+body.dark #dark-mode-toggle {
+  background: #333;
+  color: white;
+}
+
+body.dark #expense-form button:hover,
+body.dark #clear-btn:hover,
+body.dark #dark-mode-toggle:hover {
+  background: #555;
+}
+
+body.dark .history li {
+  background: #2c2c2c;
+}
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  z-index: 9999;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
