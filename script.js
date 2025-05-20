@@ -1,4 +1,4 @@
-let income = 10000;
+let income = 0;
 let expense = 0;
 let balance = income;
 
@@ -8,7 +8,10 @@ const balanceAmount = document.getElementById("balance-amount");
 const expenseForm = document.getElementById("expense-form");
 const historyList = document.getElementById("history-list");
 
-const categoryData = {};
+const incomeInput = document.getElementById("income-input");
+const setIncomeBtn = document.getElementById("set-income-btn");
+
+let categoryData = {};
 
 const ctx = document.getElementById("expenseChart").getContext("2d");
 let expenseChart = new Chart(ctx, {
@@ -34,6 +37,20 @@ let expenseChart = new Chart(ctx, {
 });
 
 updateUI();
+
+setIncomeBtn.addEventListener("click", function () {
+  const newIncome = parseFloat(incomeInput.value);
+
+  if (isNaN(newIncome) || newIncome <= 0) {
+    alert("Please enter a valid income amount.");
+    return;
+  }
+
+  income = newIncome;
+  balance = income - expense;
+  updateUI();
+  incomeInput.value = "";
+});
 
 expenseForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -89,3 +106,15 @@ function generateColors(count) {
   }
   return colors;
 }
+const clearBtn = document.getElementById("clear-btn");
+
+clearBtn.addEventListener("click", () => {
+  if (confirm("Are you sure you want to clear all transactions?")) {
+    expense = 0;
+    balance = income;
+    categoryData = {};
+    historyList.innerHTML = "";
+    updateUI();
+    updateChart();
+  }
+});

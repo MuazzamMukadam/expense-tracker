@@ -91,3 +91,38 @@ h1 {
   display: flex;
   justify-content: space-between;
 }
+.set-income {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#set-income-btn {
+  padding: 10px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#set-income-btn:hover {
+  background: #388e3c;
+}
+#clear-btn {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f44336;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+}
+
+#clear-btn:hover {
+  background: #d32f2f;
+}
