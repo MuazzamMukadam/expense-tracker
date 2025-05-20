@@ -126,4 +126,4 @@ darkModeToggle.addEventListener("click", () => {
 setTimeout(() => {
       document.getElementById('splash').style.display = 'none';
       document.querySelector('.main-content').style.display = 'block';
-    }, 2000);
+    }, 3000);

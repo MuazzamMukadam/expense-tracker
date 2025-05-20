@@ -219,3 +219,15 @@ position: fixed;
     background-position: 0% 50%;
   }
 }
+#splash h3 {
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slideInEase 2s ease forwards;
+}
+
+@keyframes slideInEase {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
