@@ -233,9 +233,14 @@ position: fixed;
   }
 }
 #splash h3 {
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4e00, #ff9500, #ff0000, #ff9500, #ff4e00);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slideInEase 2s ease forwards, fieryGradient 3s ease infinite;
   opacity: 0;
   transform: translateX(-100%);
-  animation: slideInEase 2s ease forwards;
   width: 100%;
   text-align: center;
 }
