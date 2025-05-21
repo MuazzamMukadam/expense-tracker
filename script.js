@@ -56,6 +56,9 @@ setIncomeBtn.addEventListener("click", function () {
   balance = income - expense;
   updateUI();
   incomeInput.value = "";
+
+  const rect = incomeInput.getBoundingClientRect();
+  flyMoneyAnimation(rect.left + rect.width / 2, rect.top);
 });
 
 expenseForm.addEventListener("submit", function (e) {
@@ -78,23 +81,74 @@ expenseForm.addEventListener("submit", function (e) {
   expenseHistory.push(expenseEntry);
   localStorage.setItem("expenseHistory", JSON.stringify(expenseHistory));
 
-  const li = document.createElement("li");
-  li.textContent = `${category} - ₹${amount}`;
-  historyList.appendChild(li);
-
   if (categoryData[category]) {
     categoryData[category] += amount;
   } else {
     categoryData[category] = amount;
   }
-
   localStorage.setItem("categoryData", JSON.stringify(categoryData));
+
+  addExpenseToList(expenseEntry);
+
   updateUI();
   updateChart();
 
   amountInput.value = "";
   categoryInput.value = "";
+
+  const rect = amountInput.getBoundingClientRect();
+  flyMoneyAnimation(rect.left + rect.width / 2, rect.top);
 });
+
+function addExpenseToList(entry) {
+  const li = document.createElement("li");
+  li.textContent = `${entry.category} - ₹${entry.amount}`;
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "×";
+  deleteBtn.style.marginLeft = "10px";
+  deleteBtn.style.background = "transparent";
+  deleteBtn.style.border = "none";
+  deleteBtn.style.color = "#f44336";
+  deleteBtn.style.cursor = "pointer";
+  deleteBtn.style.fontWeight = "bold";
+  deleteBtn.style.fontSize = "18px";
+  deleteBtn.setAttribute("aria-label", "Delete expense");
+
+  deleteBtn.addEventListener("click", () => {
+    expense -= entry.amount;
+    balance = income - expense;
+
+    if (categoryData[entry.category]) {
+      categoryData[entry.category] -= entry.amount;
+      if (categoryData[entry.category] <= 0) {
+        delete categoryData[entry.category];
+      }
+    }
+
+    const index = expenseHistory.indexOf(entry);
+    if (index > -1) {
+      expenseHistory.splice(index, 1);
+    }
+
+    localStorage.setItem("categoryData", JSON.stringify(categoryData));
+    localStorage.setItem("expenseHistory", JSON.stringify(expenseHistory));
+
+    li.remove();
+    updateUI();
+    updateChart();
+  });
+
+  li.appendChild(deleteBtn);
+  historyList.appendChild(li);
+}
+
+function loadHistory() {
+  historyList.innerHTML = "";
+  expenseHistory.forEach(entry => {
+    addExpenseToList(entry);
+  });
+}
 
 function updateUI() {
   incomeAmount.textContent = `₹${income}`;
@@ -118,15 +172,6 @@ function generateColors(count) {
   return colors;
 }
 
-function loadHistory() {
-  historyList.innerHTML = "";
-  expenseHistory.forEach(entry => {
-    const li = document.createElement("li");
-    li.textContent = `${entry.category} - ₹${entry.amount}`;
-    historyList.appendChild(li);
-  });
-}
-
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", () => {
   if (confirm("Are you sure you want to clear all transactions?")) {
@@ -145,13 +190,11 @@ clearBtn.addEventListener("click", () => {
 const darkModeToggle = document.getElementById("dark-mode-toggle");
 const modeIcon = document.getElementById("mode-icon");
 
-// Apply saved mode on load
 if (localStorage.getItem("darkMode") === "true") {
   document.body.classList.add("dark");
   modeIcon.classList.replace("fa-moon", "fa-sun");
 }
 
-// Toggle dark mode and icon
 darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   const isDark = document.body.classList.contains("dark");
@@ -164,8 +207,22 @@ darkModeToggle.addEventListener("click", () => {
   }
 });
 
-
 setTimeout(() => {
   document.getElementById('splash').style.display = 'none';
   document.querySelector('.main-content').style.display = 'block';
 }, 3000);
+
+function flyMoneyAnimation(startX, startY) {
+  const money = document.createElement("div");
+  money.classList.add("flying-money");
+  money.textContent = "💸";
+
+  money.style.left = `${startX}px`;
+  money.style.top = `${startY}px`;
+
+  document.body.appendChild(money);
+
+  money.addEventListener("animationend", () => {
+    money.remove();
+  });
+}

@@ -270,3 +270,26 @@ body.dark #expense-form button{
     margin-top: 3px;
   }
 }
+.flying-money {
+  position: fixed;
+  font-size: 24px;
+  pointer-events: none;
+  user-select: none;
+  animation: flyMoneyAnim 1.5s ease forwards;
+  z-index: 9999;
+}
+
+@keyframes flyMoneyAnim {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(100px, -150px) scale(1.5) rotate(90deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(200px, -300px) scale(0.5) rotate(180deg);
+  }
+}
