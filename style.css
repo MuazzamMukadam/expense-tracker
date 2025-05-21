@@ -132,14 +132,20 @@ h1 {
   background: #d32f2f;
 }
 #dark-mode-toggle {
+  order: 3px solid transparent;
   background: #333;
   color: #fff;
   border: none;
-  padding: 8px 16px;
+  padding: 10px;
   margin-bottom: 20px;
   cursor: pointer;
   border-radius: 4px;
   float: right;
+  box-shadow: 
+    0 0 10px #FFD700, 
+    0 0 20px #FFC107, 
+    0 0 30px #FFA500,
+    0 5px 10px rgba(0,0,0,0.1);
 }
 
 #dark-mode-toggle:hover {

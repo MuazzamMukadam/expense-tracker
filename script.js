@@ -1,4 +1,4 @@
-let income = 0;
+let income = parseFloat(localStorage.getItem("income")) || 0;
 let expense = 0;
 let balance = income;
 
@@ -11,7 +11,11 @@ const historyList = document.getElementById("history-list");
 const incomeInput = document.getElementById("income-input");
 const setIncomeBtn = document.getElementById("set-income-btn");
 
-let categoryData = {};
+let categoryData = JSON.parse(localStorage.getItem("categoryData")) || {};
+let expenseHistory = JSON.parse(localStorage.getItem("expenseHistory")) || [];
+
+expense = Object.values(categoryData).reduce((sum, val) => sum + val, 0);
+balance = income - expense;
 
 const ctx = document.getElementById("expenseChart").getContext("2d");
 let expenseChart = new Chart(ctx, {
@@ -37,16 +41,18 @@ let expenseChart = new Chart(ctx, {
 });
 
 updateUI();
+updateChart();
+loadHistory();
 
 setIncomeBtn.addEventListener("click", function () {
   const newIncome = parseFloat(incomeInput.value);
-
   if (isNaN(newIncome) || newIncome <= 0) {
     alert("Please enter a valid income amount.");
     return;
   }
 
   income = newIncome;
+  localStorage.setItem("income", income);
   balance = income - expense;
   updateUI();
   incomeInput.value = "";
@@ -68,6 +74,10 @@ expenseForm.addEventListener("submit", function (e) {
   expense += amount;
   balance = income - expense;
 
+  const expenseEntry = { category, amount };
+  expenseHistory.push(expenseEntry);
+  localStorage.setItem("expenseHistory", JSON.stringify(expenseHistory));
+
   const li = document.createElement("li");
   li.textContent = `${category} - ₹${amount}`;
   historyList.appendChild(li);
@@ -78,6 +88,7 @@ expenseForm.addEventListener("submit", function (e) {
     categoryData[category] = amount;
   }
 
+  localStorage.setItem("categoryData", JSON.stringify(categoryData));
   updateUI();
   updateChart();
 
@@ -106,24 +117,55 @@ function generateColors(count) {
   }
   return colors;
 }
-const clearBtn = document.getElementById("clear-btn");
 
+function loadHistory() {
+  historyList.innerHTML = "";
+  expenseHistory.forEach(entry => {
+    const li = document.createElement("li");
+    li.textContent = `${entry.category} - ₹${entry.amount}`;
+    historyList.appendChild(li);
+  });
+}
+
+const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", () => {
   if (confirm("Are you sure you want to clear all transactions?")) {
+    localStorage.clear();
+    income = 0;
     expense = 0;
-    balance = income;
+    balance = 0;
     categoryData = {};
+    expenseHistory = [];
     historyList.innerHTML = "";
     updateUI();
     updateChart();
   }
 });
-const darkModeToggle = document.getElementById("dark-mode-toggle");
 
+const darkModeToggle = document.getElementById("dark-mode-toggle");
+const modeIcon = document.getElementById("mode-icon");
+
+// Apply saved mode on load
+if (localStorage.getItem("darkMode") === "true") {
+  document.body.classList.add("dark");
+  modeIcon.classList.replace("fa-moon", "fa-sun");
+}
+
+// Toggle dark mode and icon
 darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
+  const isDark = document.body.classList.contains("dark");
+  localStorage.setItem("darkMode", isDark);
+
+  if (isDark) {
+    modeIcon.classList.replace("fa-moon", "fa-sun");
+  } else {
+    modeIcon.classList.replace("fa-sun", "fa-moon");
+  }
 });
+
+
 setTimeout(() => {
-      document.getElementById('splash').style.display = 'none';
-      document.querySelector('.main-content').style.display = 'block';
-    }, 3000);
+  document.getElementById('splash').style.display = 'none';
+  document.querySelector('.main-content').style.display = 'block';
+}, 3000);
