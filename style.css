@@ -256,3 +256,8 @@ position: fixed;
 body.dark #expense-form button{
     background: #1976d2;
 }
+@media (max-width: 600px) {
+  .tracker-container {
+    margin-top: 3px;
+  }
+}
