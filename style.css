@@ -148,6 +148,15 @@ h1 {
     0 0 30px #FFA500,
     0 5px 10px rgba(0,0,0,0.1);
 }
+#income-input {
+  padding: 15px; /* Increase padding as you want */
+  font-size: 16px; /* Optional: keep font size readable */
+  border-radius: 4px; /* Optional: to keep style consistent */
+  border: 1px solid #ccc; /* Optional: border styling */
+  width: 100%; /* Optional: full width for better usability */
+  box-sizing: border-box; /* Ensure padding doesn't overflow */
+}
+
 
 #dark-mode-toggle:hover {
   background: #555;
