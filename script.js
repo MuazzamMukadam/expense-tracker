@@ -215,7 +215,7 @@ setTimeout(() => {
 function flyMoneyAnimation(startX, startY) {
   const money = document.createElement("div");
   money.classList.add("flying-money");
-  money.textContent = "💸";
+  money.textContent = "💸 💸";
 
   money.style.left = `${startX}px`;
   money.style.top = `${startY}px`;
