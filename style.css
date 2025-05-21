@@ -174,7 +174,9 @@ body.dark #dark-mode-toggle {
   background: #333;
   color: white;
 }
-
+body.dark #clear-btn{
+  background: #f44336;
+}
 body.dark #expense-form button:hover,
 body.dark #clear-btn:hover,
 body.dark #dark-mode-toggle:hover {
@@ -243,4 +245,7 @@ position: fixed;
   transform: translateX(-100%);
   width: 100%;
   text-align: center;
+}
+body.dark #expense-form button{
+    background: #1976d2;
 }
